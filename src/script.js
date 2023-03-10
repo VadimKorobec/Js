@@ -160,10 +160,18 @@
 //   .catch(error => console.log(error))
 //   .finally(() => {});
 
+let obj;
 const promise = fetch('https://swapi.dev/api/people/1');
 console.log(promise);
 promise
   .then(res => res.json())
-  .then(data => console.log('DATA', data))
+  .then(data => {
+    foo(data);
+    console.log('data', data);
+  })
   .catch(error => console.log(error))
   .finally(() => console.log('After all'));
+
+function foo(obj) {
+  console.log('function', obj);
+}
