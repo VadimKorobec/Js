@@ -136,20 +136,34 @@
 //   .then(value => console.log(value))
 //   .catch(error => console.log(error));
 
-const promise = new Promise((resolve, reject) => {
-  const random = Math.random();
-  setTimeout(() => {
-    if (random > 0.5) {
-      resolve(20);
-    } else {
-      reject('ERROR!!!');
-    }
-  }, 30);
-});
+// const promise = new Promise((resolve, reject) => {
+//   const random = Math.random();
+//   setTimeout(() => {
+//     if (random > 0.1) {
+//       resolve(20);
+//     } else {
+//       reject('ERROR!!!');
+//     }
+//   }, 30);
+// });
 
+// promise
+//   .then(res => {
+//     return res * 3;
+//   })
+//   .then(data => {
+//     return data - 20;
+//   })
+//   .then(data => {
+//     console.log('then 3', data);
+//   })
+//   .catch(error => console.log(error))
+//   .finally(() => {});
+
+const promise = fetch('https://swapi.dev/api/people/1');
+console.log(promise);
 promise
-  .then(res => {
-    console.log(res);
-  })
+  .then(res => res.json())
+  .then(data => console.log('DATA', data))
   .catch(error => console.log(error))
-  .finally(() => {});
+  .finally(() => console.log('After all'));
