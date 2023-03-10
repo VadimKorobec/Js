@@ -147,11 +147,9 @@ const promise = new Promise((resolve, reject) => {
   }, 30);
 });
 
-promise.then(
-  response => {
-    console.log(response);
-  },
-  error => {
-    console.log(error);
-  }
-);
+promise
+  .then(res => {
+    console.log(res);
+  })
+  .catch(error => console.log(error))
+  .finally(() => {});
