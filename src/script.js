@@ -135,3 +135,23 @@
 // Promise.all([promiseA, promiseB])
 //   .then(value => console.log(value))
 //   .catch(error => console.log(error));
+
+const promise = new Promise((resolve, reject) => {
+  const random = Math.random();
+  setTimeout(() => {
+    if (random > 0.5) {
+      resolve(20);
+    } else {
+      reject('ERROR!!!');
+    }
+  }, 30);
+});
+
+promise.then(
+  response => {
+    console.log(response);
+  },
+  error => {
+    console.log(error);
+  }
+);
