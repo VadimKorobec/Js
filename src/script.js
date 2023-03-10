@@ -133,5 +133,5 @@ const promiseA = makePromise('promiseA value', 1000);
 const promiseB = makePromise('promiseB value', 3000);
 
 Promise.all([promiseA, promiseB])
-  .then(value => comsole.log(value))
+  .then(value => console.log(value))
   .catch(error => console.log(error));
