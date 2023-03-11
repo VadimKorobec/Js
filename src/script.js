@@ -231,4 +231,19 @@
 // const url = `https://jsonplaceholder.typicode.com/users?${searchParams}`;
 // console.log(url); // "https://jsonplaceholder.typicode.com/users?_limit=5&_sort=name"
 
-API_KEY = '55e8091c7fe84f4a8ab112236231103';
+const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json';
+const API_KEY = '55e8091c7fe84f4a8ab112236231103';
+
+function forecastApi(name = 'Kiev', value = 7) {
+  fetch(`${BASE_URL}?key=${API_KEY}&q=${name}&days=${value}&lang=uk`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}
+
+forecastApi();
