@@ -17,6 +17,17 @@
         <button type="button" id="fetch-btn">Fetch Users</button>
         <ul class="user-list"></ul>
       </div>
+      <div>
+        <form action="submit" class="js-search">
+          <input type="text" name="query" />
+          <select name="days">
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+          </select>
+          <button type="submit">Search...</button>
+        </form>
+      </div>
     </section>
     <script type="module" src="./script.js"></script>
   </body>
