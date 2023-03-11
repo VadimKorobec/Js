@@ -231,19 +231,53 @@
 // const url = `https://jsonplaceholder.typicode.com/users?${searchParams}`;
 // console.log(url); // "https://jsonplaceholder.typicode.com/users?_limit=5&_sort=name"
 
+const form = document.querySelector('.js-search');
+const list = document.querySelector('.list');
+
 const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json';
 const API_KEY = '55e8091c7fe84f4a8ab112236231103';
 
+form.addEventListener('submit', onSearch);
+
+function onSearch(event) {
+  event.preventDefault();
+  const {
+    days: { value: daysValue },
+    query: { value: searchValue },
+  } = event.currentTarget.elements;
+
+  if (!searchValue) {
+    alert('Write city please');
+    return;
+  }
+
+  forecastApi(searchValue, daysValue).then(data =>
+    creatMarkup(data.forecast.forecastday)
+  );
+}
+
+function creatMarkup(arr) {
+  const markup = arr
+    .map(
+      item => `<li>
+    <img src="${item.day.condition.icon}" alt="" />
+    <span>${item.day.condition.text}</span>
+    <h2>Day : ${item.date}</h2>
+    <p>${item.day.avgtemp_c}&#8451;</p>
+  </li>;`
+    )
+    .join('');
+  list.innerHTML = markup;
+}
+
 function forecastApi(name = 'Kiev', value = 7) {
-  fetch(`${BASE_URL}?key=${API_KEY}&q=${name}&days=${value}&lang=uk`)
+  return fetch(`${BASE_URL}?key=${API_KEY}&q=${name}&days=${value}&lang=uk`)
     .then(response => {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
       return response.json();
     })
-    .then(data => console.log(data))
+
     .catch(error => console.error(error));
 }
-
-forecastApi();
