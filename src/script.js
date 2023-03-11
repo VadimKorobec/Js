@@ -160,18 +160,75 @@
 //   .catch(error => console.log(error))
 //   .finally(() => {});
 
-let obj;
-const promise = fetch('https://swapi.dev/api/people/1');
-console.log(promise);
-promise
-  .then(res => res.json())
-  .then(data => {
-    foo(data);
-    console.log('data', data);
-  })
-  .catch(error => console.log(error))
-  .finally(() => console.log('After all'));
+// let obj;
+// const promise = fetch('https://swapi.dev/api/people/1');
+// console.log(promise);
+// promise
+//   .then(res => res.json())
+//   .then(data => {
+//     foo(data);
+//     console.log('data', data);
+//   })
+//   .catch(error => console.log(error))
+//   .finally(() => console.log('After all'));
 
-function foo(obj) {
-  console.log('function', obj);
-}
+// function foo(obj) {
+//   console.log('function', obj);
+// }
+
+// fetch('https://jsonplaceholder.typicode.com/users')
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(response.status);
+//     }
+//     return response.json();
+//   })
+//   .then(data => {
+//     // Data handling
+//   })
+//   .catch(error => {
+//     // Error handling
+//   });
+
+// const fetchBtn = document.getElementById('fetch-btn');
+// const userlist = document.querySelector('.user-list');
+
+// fetchBtn.addEventListener('click', () => {
+//   fetchUsers()
+//     .then(users => renderUserList(users))
+//     .catch(error => console.log(error));
+// });
+
+// function fetchUsers() {
+//   return fetch('https://jsonplaceholder.typicode.com/users').then(response => {
+//     if (!response.ok) {
+//       throw new Error(response.status);
+//     }
+//     return response.json();
+//   });
+// }
+
+// function renderUserList(users) {
+//   const markup = users
+//     .map(user => {
+//       return `<li>
+//     <p>Name : ${user.name}</p>
+//     <p>Email : ${user.email} </p>
+//     <p>Company : ${user.company.name}</p>
+//     </li>`;
+//     })
+//     .join('');
+//   userlist.innerHTML = markup;
+// }
+
+// const searchParams = new URLSearchParams({
+//   _limit: 5,
+//   _sort: 'name',
+// });
+
+// console.log(searchParams.toString()); // "_limit=5&_sort=name"
+
+// const url = `https://jsonplaceholder.typicode.com/users?${searchParams}`;
+// console.log(url); // "https://jsonplaceholder.typicode.com/users?_limit=5&_sort=name"
+
+API_KEY = '55e8091c7fe84f4a8ab112236231103';
