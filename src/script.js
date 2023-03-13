@@ -332,20 +332,24 @@ ringsApi()
   .catch(error => console.log(error));
 
 function createMarkup(arr) {
-  return arr.map(
-    ({ name, race }) => `<li>
+  return arr
+    .map(
+      ({ name, race }) => `<li>
     <h2>${name}</h2>
     <p>${race}</p>
   </li>`
-  );
+    )
+    .join('');
 }
 
 function onLoad() {
   page += 1;
-  ringsApi(page).then(data => {
-    list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
-    if (data.page === data.pages) {
-      load.setAttribute('hidden', true);
-    }
-  });
+  ringsApi(page)
+    .then(data => {
+      list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+      if (data.page === data.pages) {
+        load.setAttribute('hidden', true);
+      }
+    })
+    .catch(error => console.log(error));
 }
