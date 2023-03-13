@@ -231,53 +231,73 @@
 // const url = `https://jsonplaceholder.typicode.com/users?${searchParams}`;
 // console.log(url); // "https://jsonplaceholder.typicode.com/users?_limit=5&_sort=name"
 
-const form = document.querySelector('.js-search');
-const list = document.querySelector('.list');
+// const form = document.querySelector('.js-search');
+// const list = document.querySelector('.list');
 
-const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json';
-const API_KEY = '55e8091c7fe84f4a8ab112236231103';
+// const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json';
+// const API_KEY = '55e8091c7fe84f4a8ab112236231103';
 
-form.addEventListener('submit', onSearch);
+// form.addEventListener('submit', onSearch);
 
-function onSearch(event) {
-  event.preventDefault();
-  const {
-    days: { value: daysValue },
-    query: { value: searchValue },
-  } = event.currentTarget.elements;
+// function onSearch(event) {
+//   event.preventDefault();
+//   const {
+//     days: { value: daysValue },
+//     query: { value: searchValue },
+//   } = event.currentTarget.elements;
 
-  if (!searchValue) {
-    alert('Write city please');
-    return;
-  }
+//   if (!searchValue) {
+//     alert('Write city please');
+//     return;
+//   }
 
-  forecastApi(searchValue, daysValue).then(data =>
-    creatMarkup(data.forecast.forecastday)
-  );
-}
+//   forecastApi(searchValue, daysValue).then(data =>
+//     creatMarkup(data.forecast.forecastday)
+//   );
+// }
 
-function creatMarkup(arr) {
-  const markup = arr
-    .map(
-      item => `<li>
-    <img src="${item.day.condition.icon}" alt="" />
-    <span>${item.day.condition.text}</span>
-    <h2>Day : ${item.date}</h2>
-    <p>${item.day.avgtemp_c}&#8451;</p>
-  </li>;`
-    )
-    .join('');
-  list.innerHTML = markup;
-}
+// function creatMarkup(arr) {
+//   const markup = arr
+//     .map(
+//       item => `<li>
+//     <img src="${item.day.condition.icon}" alt="" />
+//     <span>${item.day.condition.text}</span>
+//     <h2>Day : ${item.date}</h2>
+//     <p>${item.day.avgtemp_c}&#8451;</p>
+//   </li>;`
+//     )
+//     .join('');
+//   list.innerHTML = markup;
+// }
 
-function forecastApi(name = 'Kiev', value = 7) {
-  return fetch(`${BASE_URL}?key=${API_KEY}&q=${name}&days=${value}&lang=uk`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json();
-    })
+// function forecastApi(name = 'Kiev', value = 7) {
+//   return fetch(`${BASE_URL}?key=${API_KEY}&q=${name}&days=${value}&lang=uk`)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(response.statusText);
+//       }
+//       return response.json();
+//     })
 
-    .catch(error => console.error(error));
-}
+//     .catch(error => console.error(error));
+// }
+
+// const TAX_RATE = 0.08;
+
+// function calculateFinalPurchaseAmount(amt) {
+//   console.log(amt);
+//   // вычисляем новую сумму с налогом
+//   amt = amt * TAX_RATE;
+//   console.log(amt);
+
+//   // возвращаем новую сумму
+//   return amt;
+// }
+
+// var amount = 99.99;
+
+// amount = calculateFinalPurchaseAmount(amount);
+
+// console.log(amount.toFixed(2)); // "107.99"
+
+// LxIRfOX2f4WDBIqactpC;
