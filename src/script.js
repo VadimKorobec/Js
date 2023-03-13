@@ -353,3 +353,59 @@
 //     })
 //     .catch(error => console.log(error));
 // }
+
+const BASE_URL = 'https://the-one-api.dev/v2/character';
+
+const list = document.getElementById('list');
+const guard = document.querySelector('.js-guard');
+const options = {
+  root: null,
+  rootMargin: '200px',
+  threshold: 1.0,
+};
+let page = 1;
+const observer = new IntersectionObserver(onLoad, options);
+
+function onLoad(entries, observer) {
+  console.log(entries);
+  entries.forEach(element => {
+    if (element.isIntersecting) {
+      page += 1;
+      ringsApi(page).then(data => {
+        list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+      });
+    }
+  });
+}
+
+function ringsApi(page = 1) {
+  const options = {
+    headers: {
+      Authorization: 'Bearer LxIRfOX2f4WDBIqactpC',
+    },
+  };
+  return fetch(`${BASE_URL}?limit=10&page=${page}`, options).then(response => {
+    if (!response.ok) {
+      throw new Error(console.log(error));
+    }
+    return response.json();
+  });
+}
+
+function createMarkup(arr) {
+  return arr
+    .map(
+      ({ name, race }) => `<li>
+    <h2>${name}</h2>
+    <p>${race}</p>
+  </li>`
+    )
+    .join('');
+}
+
+ringsApi()
+  .then(data => {
+    list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+    observer.observe(guard);
+  })
+  .catch(error => console.log(error));
