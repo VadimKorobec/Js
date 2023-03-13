@@ -304,20 +304,48 @@
 
 const BASE_URL = 'https://the-one-api.dev/v2/character';
 
+const list = document.getElementById('list');
+const load = document.getElementById('load-more');
+
+load.addEventListener('click', onLoad);
+
+let page = 1;
+
 function ringsApi(page = 1) {
   const options = {
     headers: {
       Authorization: 'Bearer LxIRfOX2f4WDBIqactpC',
     },
   };
-  return fetch(`${BASE_URL}?limit=30&page=${page}`, options)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(console.log(error));
-      }
-      return response.json();
-    })
-    .then(data => console.log(data));
+  return fetch(`${BASE_URL}?limit=300&page=${page}`, options).then(response => {
+    if (!response.ok) {
+      throw new Error(console.log(error));
+    }
+    return response.json();
+  });
 }
 
-ringsApi().then();
+ringsApi()
+  .then(data => {
+    list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+  })
+  .catch(error => console.log(error));
+
+function createMarkup(arr) {
+  return arr.map(
+    ({ name, race }) => `<li>
+    <h2>${name}</h2>
+    <p>${race}</p>
+  </li>`
+  );
+}
+
+function onLoad() {
+  page += 1;
+  ringsApi(page).then(data => {
+    list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+    if (data.page === data.pages) {
+      load.setAttribute('hidden', true);
+    }
+  });
+}
