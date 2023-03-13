@@ -301,3 +301,23 @@
 // console.log(amount.toFixed(2)); // "107.99"
 
 // LxIRfOX2f4WDBIqactpC;
+
+const BASE_URL = 'https://the-one-api.dev/v2/character';
+
+function ringsApi(page = 1) {
+  const options = {
+    headers: {
+      Authorization: 'Bearer LxIRfOX2f4WDBIqactpC',
+    },
+  };
+  return fetch(`${BASE_URL}?limit=30&page=${page}`, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(console.log(error));
+      }
+      return response.json();
+    })
+    .then(data => console.log(data));
+}
+
+ringsApi().then();
