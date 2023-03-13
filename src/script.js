@@ -363,16 +363,19 @@ const options = {
   rootMargin: '200px',
   threshold: 1.0,
 };
-let page = 1;
+let page = 0;
 const observer = new IntersectionObserver(onLoad, options);
+observer.observe(guard);
 
 function onLoad(entries, observer) {
-  console.log(entries);
   entries.forEach(element => {
     if (element.isIntersecting) {
       page += 1;
       ringsApi(page).then(data => {
         list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+        if (data.page === data.pages) {
+          observer.onobserve(guard);
+        }
       });
     }
   });
@@ -403,9 +406,9 @@ function createMarkup(arr) {
     .join('');
 }
 
-ringsApi()
-  .then(data => {
-    list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
-    observer.observe(guard);
-  })
-  .catch(error => console.log(error));
+// ringsApi()
+//   .then(data => {
+//     list.insertAdjacentHTML('beforeend', createMarkup(data.docs));
+//     observer.observe(guard);
+//   })
+//   .catch(error => console.log(error));
